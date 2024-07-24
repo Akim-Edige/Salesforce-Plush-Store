@@ -1,0 +1,72 @@
+<template>
+    <a onclick={handleProductSelected} title={productName}>
+        <div class="tile" style = {backgroundImageStyle}>
+            <div
+                    class="lower-third slds-var-p-horizontal_x-small slds-var-p-vertical_xx-small slds-text-color_inverse"
+            >
+                <h1 class="truncate slds-text-heading_small">
+                    <strong>{productName}</strong>
+                </h1>
+                <p>Family: {productFamily} - Type: {productType}</p>
+                <p>
+                    <lightning-formatted-number
+                            format-style="currency"
+                            currency-code="USD"
+                            value={productPrice}
+
+                    ></lightning-formatted-number>
+                </p>
+                <div class="buttons">
+                    <div class="action_btn">
+                        <lightning-button
+                                slot="actions"
+                                label="Details"
+                                onclick={handleProductSelected}
+                        ></lightning-button>
+                        <lightning-button
+                                slot="actions"
+                                label="Add"
+                                onclick={handleAdd}
+                        ></lightning-button>
+                        <p id="saved"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <template if:true={isDetailsClicked}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Details</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p>Name: {productName}</p>
+                    <hr style="width:50%;text-align:left;margin-left:0">
+                    <p>Type: {productType}</p>
+                    <hr style="width:50%;text-align:left;margin-left:0">
+                    <p>Family: {productFamily}</p>
+                    <hr style="width:50%;text-align:left;margin-left:0">
+                    <p>Price: {productPrice}</p>
+                    <hr style="width:50%;text-align:left;margin-left:0">
+                    <p>Description: {productDescription}</p>
+                    <br/>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleCloseButton}>Close</button>
+                    <button class="slds-button slds-button_brand" onclick = {handleAddINSIDE}>Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>
+

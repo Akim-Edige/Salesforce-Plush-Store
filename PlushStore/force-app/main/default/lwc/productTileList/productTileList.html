@@ -1,0 +1,28 @@
+<template>
+    <div class="slds-card slds-var-p-around_small">
+        <template lwc:if={products.data}>
+            <div class="slds-grid slds-wrap">
+                <template
+                        for:each={products.data}
+                        for:item="product">
+
+                    <c-product-tile
+                            key={product.Id}
+                            product-name={product.Name}
+                            product-price={product.Price__c}
+                            product-description={product.Description__c}
+                            product-family = {product.Family__c}
+                            product-type={product.Type__c}
+                            product-tile-image={product.Product_Image__c}
+
+                            onselected={handleProductSelected}
+                            class="slds-col slds-var-m-around_xx-small"
+                    ></c-product-tile>
+                </template>
+            </div>
+        </template>
+        <template lwc:if={products.error}>
+            {products.error}
+        </template>
+    </div>
+</template>

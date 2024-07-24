@@ -1,0 +1,26 @@
+<template>
+    <lightning-input class = "searchbar"
+            label="Search Key"
+            type="text"
+            value={searchKey}
+            onchange={handleSearchKeyChange}
+    ></lightning-input>
+    </br>
+    </br>
+    <lightning-card title="Filters" icon-name="standard:calibration">
+        <div class="slds-var-m-horizontal_medium">
+            <lightning-checkbox-group name=""
+                                      label="Family"
+                                      options={optionsFamily}
+                                      value={valueFamily}
+                                      onchange={handleCheckboxChange}></lightning-checkbox-group>
+            <p></p>
+            <lightning-checkbox-group name=""
+                                      label="Type"
+                                      options={optionsType}
+                                      value={valueType}
+                                      onchange={handleCheckboxChange}></lightning-checkbox-group>
+
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,94 @@
+<template>
+    <lightning-card >
+        <p class="acc"> Account Name: {getName}                  Account Number: {getNumber}</p>
+        <div class="buttons">
+            <div class="action_btn">
+                <lightning-button
+                        slot="actions"
+                        label="Create Product"
+                        onclick={handleCreateProduct}
+                ></lightning-button>
+                <lightning-button
+                        slot="actions"
+                        label="Cart"
+                        onclick={handleCart}
+                ></lightning-button>
+                <p id="saved"></p>
+            </div>
+        </div>
+    </lightning-card>
+
+<!-- Product Create part-->
+
+
+    <template if:true={IsCreateClicked}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Create Product</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    Product Name:
+                    <lightning-input required>
+                        label="Product Name"
+                        type="text"
+                        value={newName}
+                        onchange={handleInputName}
+                    </lightning-input>
+
+                    <div class="slds-m-top_medium slds-m-bottom_x-large">
+                        <!-- Simple -->
+                        <label for="dropdownFamilyMenu" required>Family:</label>
+                        <select id="dropdownFamilyMenu" onchange={handleFamilyMenu} required>
+                            <option value="Penguins">Penguins</option>
+                            <option value="Bears">Bears</option>
+                            <option value="Cats">Cats</option>
+                        </select>
+                        <p></p>
+                        <label for="dropdownTypeMenu" required>Type:</label>
+                        <select id="dropdownTypeMenu" onchange={handleTypeMenu} required>
+                            <option value="80 cm">80 cm</option>
+                            <option value="110 cm">110 cm</option>
+                            <option value="130 cm">130 cm</option>
+                            <option value="150 cm">150 cm</option>
+                        </select>
+                    </div>
+
+                    Price:
+                    <lightning-input required>
+                        label="Price"
+                        type="Number"
+                        value={newPrice}
+                        onchange={handleInputPrice}
+                    </lightning-input>
+                    Description:
+                    <lightning-input required>
+                        label="Product Name"
+                        type="text"
+                        value={newDescription}
+                        onchange={handleInputDescription}
+                    </lightning-input>
+                    <p></p>
+                    <lightning-input-rich-text required>
+                        label="Image"
+                        type="text"
+                        value={newImage}
+                        onchange={handleInputImage}
+                    </lightning-input-rich-text>
+
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleCloseButton}>Close</button>
+                    <button class="slds-button slds-button_brand" onclick = {handleAddINSIDE}>Create</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

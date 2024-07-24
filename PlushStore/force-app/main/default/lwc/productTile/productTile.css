@@ -1,0 +1,36 @@
+.tile {
+    position: relative;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.lower-third {
+    position: absolute;
+    /* @sldsValidatorIgnore */
+    bottom: 0;
+    /* @sldsValidatorIgnore */
+    left: 0;
+    /* @sldsValidatorIgnore */
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.truncate {
+    /* @sldsValidatorIgnore */
+    white-space: nowrap;
+    overflow: hidden;
+    /* @sldsValidatorIgnore */
+    text-overflow: ellipsis;
+}
+
+.buttons {
+    width: 150px;
+    margin: 0 auto;
+    display: inline;}
+
+.action_btn {
+    width: 150px;
+    margin: 0 auto;
+    display: inline;}

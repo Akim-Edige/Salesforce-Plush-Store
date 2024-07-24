@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SFDXConfigListPersistentComponent">
+    <option name="configInfos">
+      <list>
+        <SFDXConfigInfo>
+          <option name="key" value="target-dev-hub" />
+          <option name="location" value="Global" />
+          <option name="value" value="myhuborg" />
+        </SFDXConfigInfo>
+        <SFDXConfigInfo>
+          <option name="key" value="target-org" />
+          <option name="location" value="Global" />
+          <option name="value" value="mydevorg" />
+        </SFDXConfigInfo>
+      </list>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,23 @@
+
+.buttons {
+    display: inline;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end; /* Adjust the gap between buttons */
+    gap: 100px
+}
+
+
+.acc{
+    display: inline;
+    padding-left: 10px; /* Move text to the right */
+    padding-top: 10px; /* Move text down */
+}
+/*.action_btn {*/
+/*    width: 150px;*/
+/*    margin: 0 auto;*/
+/*    display: inline;*/
+/*    padding: 5px 10px;  !* Adjust button padding as desired *!*/
+/*    cursor: pointer;*/
+/*}*/
