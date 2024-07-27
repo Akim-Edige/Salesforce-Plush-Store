@@ -14,8 +14,13 @@
                             product-family = {product.Family__c}
                             product-type={product.Type__c}
                             product-tile-image={product.Product_Image__c}
-
+                            product-id={product.Id}
+                            new-order={newOrder}
+                            order-id={orderId}
+                            total-count={totalCount}
                             onselected={handleProductSelected}
+                            onordercreated={handleOrderCreated}
+                            oncountadd = {handleCountAdd}
                             class="slds-col slds-var-m-around_xx-small"
                     ></c-product-tile>
                 </template>

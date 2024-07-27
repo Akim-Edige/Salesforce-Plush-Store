@@ -3,66 +3,88 @@ import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
 
 import {subscribe, unsubscribe, MessageContext} from 'lightning/messageService';
 import ProductsFiltered from '@salesforce/messageChannel/ProductsFiltered__c';
+import Reset from '@salesforce/messageChannel/Reset__c';
 
 import getProductList from '@salesforce/apex/ProductController.getProductList';
+
 
 
 export default class HelloForEach extends LightningElement {
 
     @api recordId
 
-    // @wire(getProductList, {recordId: 'a02WU000001jIbXYAU', fields:['Product__c.Name', 'Product__c.Description__c', 'Product__c.Price__c', 'Product__c.Type__c', 'Product__c.Family__c', 'Product__c.Product_Image__c']})
-    // products;
-
 
     keySearch = ``;
-    subscription = null;
+    productsFilteredSubscription = null;
+    ResetSubscription = null;
     checkedFamily = [];
     checkedType = [];
-    filters = {
-        keySearch:'',
-        checkedFamily: [],
-        checkedType: []
-    };
 
 
     @wire(getProductList, {Key:'$keySearch', family:'$checkedFamily', type:'$checkedType'})
     products;
 
 
+    // Cart managing
+
+    orderId = ''
+    newOrder=true;
+    totalCount=1;
+
+    // Handling custom events from child component
+
+    handleOrderCreated(event){
+        this.orderId= event.detail
+        console.log("Received orderId here in tile list: ", this.orderId)
+        this.newOrder=false;
+
+    }
+
+    handleCountAdd(event){
+        this.totalCount = event.detail
+    }
+
+    // Message Controlling
 
     @wire(MessageContext) messageContext
     // This function is called when component is loaded in Document Object Model (DOM)
-    connectedCallback()
-    {
-        this.handleSubscribe();
+    connectedCallback() {
+        this.subscribeToMessageChannels();
     }
 
-    disconnectedCallback()
-    {
-        this.handleUnsubscribe();
-    }
+    subscribeToMessageChannels() {
 
-    handleSubscribe(){
-        if (!this.subscription) {
-            this.subscription = subscribe(this.messageContext, ProductsFiltered,
+        if (!this.ResetSubscription) {
+            this.ResetSubscription = subscribe(this.messageContext, Reset,
                 (parameter)=>
                 {
-                    // this.filters.set(keySearch, parameter.searchkey)
-                    // this.filters.set(checkedFamily, parameter.checkedfamily)
-                    // this.filters.set(searchkey,parameter.checkedtype)
+                    this.orderId=parameter.orderid
+                    this.newOrder=parameter.neworder
+                    this.totalCount=parameter.totalcount
+
+                    console.log("HERE RESTART", this.orderId)
+                }
+            );
+        }
+
+        if (!this.productsFilteredSubscription) {
+            this.productsFilteredSubscription = subscribe(this.messageContext, ProductsFiltered,
+                (parameter)=>
+                {
                     this.checkedFamily=parameter.checkedfamily
                     this.checkedType=parameter.checkedtype
                     this.keySearch=parameter.searchkey
                 }
             );
         }
+
     }
 
 
-    handleUnsubscribe(){
-        unsubscribe(this.subscription);
-        this.subscription=null;
+    disconnectedCallback() {
+        unsubscribe(this.productsFilteredSubscription);
+        this.productsFilteredSubscription = null;
+        unsubscribe(this.ResetSubscription);
+        this.ResetSubscription = null;
     }
-
 }

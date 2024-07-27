@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <isExposed>true</isExposed>
+    <masterLabel>OrderAdd</masterLabel>
+    <description>This event is fired when new order is created.</description>
+
+    <lightningMessageFields>
+        <fieldName>orderid</fieldName>
+        <description>Id of new order</description>
+    </lightningMessageFields>
+
+    <lightningMessageFields>
+        <fieldName>neworder</fieldName>
+        <description>Boolean indicator of order</description>
+    </lightningMessageFields>
+
+    <lightningMessageFields>
+        <fieldName>totalcount</fieldName>
+        <description>Total count of product</description>
+    </lightningMessageFields>
+
+</LightningMessageChannel>
