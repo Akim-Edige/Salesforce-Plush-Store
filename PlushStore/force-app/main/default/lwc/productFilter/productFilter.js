@@ -1,16 +1,11 @@
 import { LightningElement, wire, api } from 'lwc';
-import { getPicklistValues } from 'lightning/uiObjectInfoApi';
-//
 
-//
 // // Lightning Message Service and a message channel
 import { MessageContext, publish } from 'lightning/messageService';
 import ProductsFiltered from '@salesforce/messageChannel/ProductsFiltered__c';
 
 // The delay used when debouncing event handlers before firing the event
 const DELAY = 350;
-// import FAMILY_FIELD from '@salesforce/schema/Product__c.Family__c';
-// import TYPE_FIELD from '@salesforce/schema/Product__c.Type__c';
 
 
 export default class ProductFilter extends LightningElement {
@@ -80,9 +75,6 @@ export default class ProductFilter extends LightningElement {
 
 
     fireChangeEvent() {
-        // Debouncing this method: Do not actually fire the event as long as this function is
-        // being called within a delay of DELAY. This is to avoid a very large number of Apex
-        // method calls in components listening to this event.
         window.clearTimeout(this.delayTimeout);
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         this.delayTimeout = setTimeout(() => {
