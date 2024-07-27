@@ -206,10 +206,26 @@ export default class header extends LightningElement {
         this.isCartClicked = true;
     }
 
-    OrderUrl = ''
+
+    handleClear(){
+        this.resetting();
+    }
+
 
     handleBuy(event){
-        this.OrderUrl = 'https://curious-raccoon-sgoldy-dev-ed.trailblaze.lightning.force.com/lightning/r/Order__c/'+this.orderId+'/view'
+
+        this.resetting();
+
+        const evt = new ShowToastEvent({
+            title: 'Success!',
+            message: 'Thank you for the Purchase!',
+            variant: 'success',
+        });
+        this.dispatchEvent(evt);
+
+    }
+
+    resetting(){
         this.orderId='';
         this.isCartClicked=false;
         this.newOrder=true;
@@ -225,16 +241,6 @@ export default class header extends LightningElement {
             };
             publish(this.messageContext, Reset, order);
         }, DELAY);
-
-
-        const evt = new ShowToastEvent({
-            title: 'Success!',
-            message: 'Thank you for the Purchase!',
-            variant: 'success',
-        });
-        this.dispatchEvent(evt);
-
-        event.window.open(this.OrderUrl)
     }
 
 }
